@@ -11,7 +11,7 @@ export class Mod {
 }
 export class ModAPI_C extends Mod {
     public name: string = "ModAPI";
-    public description: string = "A API for rmtrollbox mods";
+    public description: string = "An API for rmtrollbox mods";
     public version: string = "0.0.1";
     public namespace: string = "modapi";
     private loaded: Mod[] = [];
