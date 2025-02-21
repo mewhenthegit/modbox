@@ -60,49 +60,52 @@ class ModLoader extends Mod {
 
 export { Mod, ModAPI, ModAPI_C };
 
+//@ts-ignore
+window.modbox = ModBox;
+
 // setTimeout(() => {
 //     alert("balls")
-//     // //@ts-ignore
-//     // window.modbox.ModAPI.LoadMod(MBLogger);
-//     // //@ts-ignore
-//     // window.modbox.ModAPI.LoadMod(rmtrollbox);
-//     // //@ts-ignore
-//     // window.modbox.ModAPI.LoadMod(ModStorage);
-//     // //@ts-ignore
-//     // window.modbox.ModAPI.LoadMod(LoaderMod);
-//     // //@ts-ignore
-//     // window.modbox.ModAPI.LoadMod(ModLoader);
+//@ts-ignore
+window.modbox.ModAPI.LoadMod(MBLogger);
+//@ts-ignore
+window.modbox.ModAPI.LoadMod(trollbox);
+//@ts-ignore
+window.modbox.ModAPI.LoadMod(ModStorage);
+//@ts-ignore
+window.modbox.ModAPI.LoadMod(LoaderMod);
+//@ts-ignore
+window.modbox.ModAPI.LoadMod(ModLoader);
 // }, 500)
 
-//@ts-ignore
-$kernel.on("splash:ready", ()=>{ // run when w93 boots
-    // TODO: make this less shitty
-    // alert("launched!")
-    //@ts-ignore
-    window.modbox = ModBox;
-    setInterval(()=>{
-        for(let frame of document.getElementsByTagName("iframe")) {
-            console.log(frame.src);
-            if (frame.src == "https://www.windows93.net/trollbox/index.php") {
-                //@ts-ignore
-                if (frame.contentWindow.modbox != null) { continue; }
+// //@ts-ignore
+// $kernel.on("splash:ready", ()=>{ // run when w93 boots
+//     // TODO: make this less shitty
+//     // alert("launched!")
+//     //@ts-ignore
+//     // window.modbox = ModBox;
+//     // setInterval(()=>{
+//     //     for(let frame of document.getElementsByTagName("iframe")) {
+//     //         console.log(frame.src);
+//     //         if (frame.src == "https://www.windows93.net/trollbox/index.php") {
+//     //             //@ts-ignore
+//     //             if (frame.contentWindow.modbox != null) { continue; }
 
-                //@ts-ignore
-                frame.contentWindow.modbox = ModBox;
+//     //             //@ts-ignore
+//     //             frame.contentWindow.modbox = ModBox;
 
-                setTimeout(()=> {
-                    //@ts-ignore
-                    frame.contentWindow.modbox.ModAPI.LoadMod(MBLogger);
-                    //@ts-ignore
-                    frame.contentWindow.modbox.ModAPI.LoadMod(trollbox);
-                    //@ts-ignore
-                    frame.contentWindow.modbox.ModAPI.LoadMod(ModStorage);
-                    //@ts-ignore
-                    frame.contentWindow.modbox.ModAPI.LoadMod(LoaderMod);
-                    //@ts-ignore
-                    frame.contentWindow.modbox.ModAPI.LoadMod(ModLoader);
-                },500)
-            }
-        }
-    })
-})
+//     //             setTimeout(()=> {
+//     //                 //@ts-ignore
+//     //                 frame.contentWindow.modbox.ModAPI.LoadMod(MBLogger);
+//     //                 //@ts-ignore
+//     //                 frame.contentWindow.modbox.ModAPI.LoadMod(trollbox);
+//     //                 //@ts-ignore
+//     //                 frame.contentWindow.modbox.ModAPI.LoadMod(ModStorage);
+//     //                 //@ts-ignore
+//     //                 frame.contentWindow.modbox.ModAPI.LoadMod(LoaderMod);
+//     //                 //@ts-ignore
+//     //                 frame.contentWindow.modbox.ModAPI.LoadMod(ModLoader);
+//     //             },500)
+//     //         }
+//     //     }
+//     // })
+// })

@@ -25,16 +25,8 @@ export default class trollbox extends Mod {
     public namespace: string = "trollbox";
     public logger = ModAPI.GetMod<MBLogger>("mblogger").CreateLogger("trollbox");
     private registeredCommands: Command[] = [];
-    public frame: HTMLIFrameElement = document.createElement("iframe");
     public init() {
         this.logger.log("Initializing trollbox API");
-        for (let iframe of document.getElementsByTagName("iframe")) {
-            if (iframe.src == "https://www.windows93.net/trollbox/index.php") {
-                this.frame = iframe;
-                break;
-            }
-        }
-
         let sndMsgHook = ModAPI.Hook("sendMsg");
         sndMsgHook.on("call", (ev: Event) => {
             let msg = ev.data.funcargs[0];
@@ -70,7 +62,7 @@ export default class trollbox extends Mod {
     }
     public PrintMessage(msg: Message) {
         //@ts-ignore
-        this.frame.contentWindow.printMsg(msg);
+        window.printMsg(msg);
     }
     public RegisterCommand(cmd: Command) {
         this.registeredCommands.push(cmd);
@@ -81,7 +73,7 @@ export default class trollbox extends Mod {
     // public OpenPopup(html: string) { // prob doesnt exist in trollbox anymore
     //     return new Promise(resolve => {
     //         //@ts-ignore
-    //         frame.contentWindow.popup(html,resolve); // resolve gets called when the popup is open
+    //         window.popup(html,resolve); // resolve gets called when the popup is open
     //     })
     // }
 }
