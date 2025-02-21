@@ -8,6 +8,7 @@ export class Mod {
     public version: string = "0.0.0";
     public namespace: string = "mod";
     init() {}
+    constructor(){};
 }
 export class ModAPI_C extends Mod {
     public name: string = "ModAPI";
@@ -28,10 +29,16 @@ export class ModAPI_C extends Mod {
         return this.loaded;
     }
     public LoadMod(mod: any) {
+        if (mod == null) {
+            //@ts-ignore
+            $alert("Uh oh! Something went horribly wrong loading a mod!");
+            // return false;
+        }
         let lmod: Mod = new mod();
         if (this.loaded.find(x => x.name === lmod.name)) return;
         this.loaded.push(lmod);
         lmod.init();
+        // return true;
     }
     public ReplaceMod(mod: Mod, newmod: Mod) {
         let index = this.loaded.findIndex(x => x.name === mod.name);

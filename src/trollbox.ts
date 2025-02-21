@@ -2,7 +2,7 @@ import { Mod, ModAPI } from "./modapi";
 import MBLogger from "./mblogger";
 import EventEmitter, {Event} from "./events";
 
-export interface rmMessage {
+export interface Message {
     nick: string;
     home: string;
     msg: string;
@@ -18,15 +18,23 @@ export interface Command {
     execute: (args: string[]) => void;
 }
 
-export default class rmtrollbox extends Mod {
-    public name: string = "rmtrollbox";
-    public description: string = "rmtrollbox API";
+export default class trollbox extends Mod {
+    public name: string = "trollbox";
+    public description: string = "trollbox API";
     public version: string = "0.0.1";
-    public namespace: string = "rmtrollbox";
-    public logger = ModAPI.GetMod<MBLogger>("mblogger").CreateLogger("rmtrollbox");
+    public namespace: string = "trollbox";
+    public logger = ModAPI.GetMod<MBLogger>("mblogger").CreateLogger("trollbox");
     private registeredCommands: Command[] = [];
+    public frame: HTMLIFrameElement = document.createElement("iframe");
     public init() {
-        this.logger.log("Initializing rmtrollbox API");
+        this.logger.log("Initializing trollbox API");
+        for (let iframe of document.getElementsByTagName("iframe")) {
+            if (iframe.src == "https://www.windows93.net/trollbox/index.php") {
+                this.frame = iframe;
+                break;
+            }
+        }
+
         let sndMsgHook = ModAPI.Hook("sendMsg");
         sndMsgHook.on("call", (ev: Event) => {
             let msg = ev.data.funcargs[0];
@@ -51,11 +59,18 @@ export default class rmtrollbox extends Mod {
                 }
             }
         })
-        this.logger.info("rmtrollbox api initialized");
+        this.logger.info("trollbox api initialized");
+        this.PrintMessage({
+            nick: "modbox",
+            color: "green",
+            home: "balls",
+            date: Date.now(),
+            msg: "Modbox active!"
+        })
     }
-    public PrintMessage(msg: rmMessage) {
+    public PrintMessage(msg: Message) {
         //@ts-ignore
-        window.printMsg(msg);
+        this.frame.contentWindow.printMsg(msg);
     }
     public RegisterCommand(cmd: Command) {
         this.registeredCommands.push(cmd);
@@ -63,12 +78,12 @@ export default class rmtrollbox extends Mod {
     public GetElement(uielement: UIElement) {
         return document.querySelector(`#trollbox > ${uielement.GetSelector()}`);
     }
-    public OpenPopup(html: string) {
-        return new Promise(resolve => {
-            //@ts-ignore
-            window.popup(html,resolve); // resolve gets called when the popup is open
-        })
-    }
+    // public OpenPopup(html: string) { // prob doesnt exist in trollbox anymore
+    //     return new Promise(resolve => {
+    //         //@ts-ignore
+    //         frame.contentWindow.popup(html,resolve); // resolve gets called when the popup is open
+    //     })
+    // }
 }
 class UIElement {
     private _children: UIElement[] = [];

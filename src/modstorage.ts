@@ -11,28 +11,44 @@ export default class ModStorage extends Mod {
 }
 class StorageData {
     constructor(public name: string) {}
-    public Get(key: string): any {
-        return localStorage.getItem(`${this.name}/${key}`);
+    public Get(key: string, c: Function): any {
+        //@ts-ignore
+        $db.get(`modbox/${this.name}/${key}`, (_, content) => {
+            console.log(_, content)
+            c(content);
+        })
+        // return localStorage.getItem(`modbox/${this.name}/${key}`);
     }
     public Set(key: string, value: any) {
-        localStorage.setItem(`${this.name}/${key}`, value);
+        //@ts-ignore
+        $db.set(`modbox/${this.name}/${key}`,value);
+        // localStorage.setItem(`modbox/${this.name}/${key}`, value);
     }
     public Remove(key: string) {
-        localStorage.removeItem(`${this.name}/${key}`);
+        //@ts-ignore
+        $db.del(`modbox/${this.name}/${key}`);
+        // localStorage.removeItem(`modbox/${this.name}/${key}`);
     }
-    public List() {
-        let keys = Object.keys(localStorage);
-        let mods = [];
-        for (let i = 0; i < keys.length; i++) {
-            if (keys[i].startsWith(this.name+"/")) {
-                mods.push(keys[i].replace(`${this.name}/`, ""));
+    public List(c: Function) {
+        //@ts-ignore
+        return $db.keys((_, keys: Array<String>) => {
+            let mods = [];
+            for (let i = 0; i < keys.length; i++) {
+                if (keys[i].startsWith("modbox/"+this.name+"/")) {
+                    mods.push(keys[i].replace(`modbox/${this.name}/`, ""));
+                }
             }
-        }
-        return mods;
+            c(mods);
+        });
+        // let keys = Object.keys(localStorage);
     }
     public Clear() {
-        this.List().forEach(key => {
-            this.Remove(key);
-        });
+        //@ts-ignore
+        this.List((keys)=> {
+            //@ts-ignore
+            keys.forEach(key => {
+                this.Remove(key);
+            });
+        })
     }
 }

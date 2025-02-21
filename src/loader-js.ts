@@ -5,7 +5,16 @@ export default class LoaderMod extends Mod {
     public version: string = "0.0.1";
     public namespace: string = "loader-js";
     Load(data: string): Mod {
-        return eval(`(function(){return ${data}})();`) as Mod;
+        try {
+            let result = eval(`(function(){return ${data}})();`);
+            console.log(`(function(){return ${data}})();`)
+            console.log(result);
+
+            return result;
+        } catch(e) {
+            console.error(e);
+            return new Mod;
+        }
     }
     CanLoad(file: string): boolean {
         return file.endsWith(".js");
