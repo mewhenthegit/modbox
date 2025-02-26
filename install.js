@@ -29,9 +29,9 @@
 
 
 
-    fetch("http://localhost:8080/dist/boot.js").then((d) => d.text() ).then( (bootcode) => { // i hate promises
+    fetch("http://modbox.codersquack.nl/dist/boot.js").then((d) => d.text() ).then( (bootcode) => { // i hate promises
         $file.save("/a/modbox/mods/alert.js", example, (e)=>{})
-        fetch("http://localhost:8080/dist/bundle.js").then(d => d.text()).then((bundlecode) => {
+        fetch("http://modbox.codersquack.nl/dist/bundle.js").then(d => d.text()).then((bundlecode) => {
             $file.save("/a/modbox/init/bundle.js", bundlecode, (_)=>{
                 $file.save("/a/boot/modbox.js", bootcode, (content) => {
                     $alert("Finished le installation", () => {
