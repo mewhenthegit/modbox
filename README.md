@@ -9,3 +9,11 @@ Instead:
 - paste this: `try { fetch('http://modbox.codersquack.nl/install.js').then((r)=>r.text()).then((c)=>eval(c)); } catch(e) { alert(e) }`
 ### Documentation
 You can check the documentation [here](https://nicejs-is-cool.github.io/modbox/docs)
+
+### Adding Mods
+To add mods, simply go to /a/modbox/mods and add a JS file containing mod code. As of right now there is no mod store or anything (tho you can make that if you want :) \)
+
+### Making mods
+See the example mod (in examples/alert.js or /a/modbox/mods/alert.js). Also see the official documentation https://nicejs-is-cool.github.io/modbox/docs/.
+
+Do keep in mind, the `rmtrollbox` mod has been renamed to `trollbox`
