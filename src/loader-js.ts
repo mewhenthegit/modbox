@@ -6,11 +6,7 @@ export default class LoaderMod extends Mod {
     public namespace: string = "loader-js";
     Load(data: string): Mod {
         try {
-            let result = eval(`(function(){return ${data}})();`);
-            console.log(`(function(){return ${data}})();`)
-            console.log(result);
-
-            return result;
+            return eval(`(function(){return ${data}})();`);
         } catch(e) {
             console.error(e);
             return new Mod;

@@ -8,7 +8,7 @@ export class Mod {
     public version: string = "0.0.0";
     public namespace: string = "mod";
     init() {}
-    constructor(){};
+    // constructor(){};
 }
 export class ModAPI_C extends Mod {
     public name: string = "ModAPI";

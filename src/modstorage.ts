@@ -14,7 +14,7 @@ class StorageData {
     public Get(key: string, c: Function): any {
         //@ts-ignore
         $db.get(`modbox/${this.name}/${key}`, (_, content) => {
-            console.log(_, content)
+            // console.log(_, content)
             c(content);
         })
         // return localStorage.getItem(`modbox/${this.name}/${key}`);
