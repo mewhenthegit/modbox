@@ -13,6 +13,8 @@ You can check the documentation [here](https://nicejs-is-cool.github.io/modbox/d
 ### Adding Mods
 To add mods, simply go to /a/modbox/mods and add a JS file containing mod code. As of right now there is no mod store or anything (tho you can make that if you want :) \)
 
+Here's one of the mods i made (BetterChat): https://pastebin.com/J5AibSLg 
+
 ### Making mods
 See the example mod (in examples/alert.js or /a/modbox/mods/alert.js). Also see the official documentation https://nicejs-is-cool.github.io/modbox/docs/.
 
