@@ -6,7 +6,7 @@ The installation is simple, ~~[Just click this link!](https://windows93.net/#!js
 Instead:
 - open win93
 - open terminal
-- paste this: `try { fetch('http://modbox.codersquack.nl/install.js').then((r)=>r.text()).then((c)=>eval(c)); } catch(e) { alert(e) }`
+- paste this: `try { fetch('https://mewhenthegit.github.io/modbox/install.js').then((r)=>r.text()).then((c)=>eval(c)); } catch(e) { alert(e) }`
 ### Documentation
 You can check the documentation [here](https://nicejs-is-cool.github.io/modbox/docs)
 
